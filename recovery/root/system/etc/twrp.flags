@@ -1,0 +1,27 @@
+# Mount Point             FSType   Device1                Device2                  Flags
+/nvdata                   ext4     /dev/block/by-name/nvdata                       flags=backup=1;display="NVData";flashimg=1
+/nvcfg                    ext4     /dev/block/by-name/nvcfg   
+/persist                  ext4     /dev/block/by-name/persist                      flags=backup=1;display="Persist";flashimg=1
+/persistent               emmc     /dev/block/by-name/frp                          flags=backup=1;display="Persisten";flashimg=1
+/nvram                    emmc     /dev/block/by-name/nvram                        flags=backup=1;display="NVRam";flashimg=1
+/cache                    ext4     /dev/block/by-name/cache
+/logo                     emmc     /dev/block/by-name/logo         
+/tee1                     emmc     /dev/block/by-name/tee1         
+/tee2                     emmc     /dev/block/by-name/tee2 
+/protect_f                ext4     /dev/block/by-name/protect1     
+/protect_s                ext4     /dev/block/by-name/protect2
+/proinfo                  emmc     /dev/block/by-name/proinfo
+/bootloader               emmc     /dev/block/by-name/lk           
+/bootloader2              emmc     /dev/block/by-name/lk2          
+/cust                     ext4     /dev/block/by-name/cust        
+/recovery                 emmc     /dev/block/by-name/recovery                       flags=display=recovery;backup=1
+/boot                     emmc     /dev/block/by-name/boot                           flags=display=boot;backup=1
+
+# VBMeta
+/vbmeta_vendor            emmc     /dev/block/by-name/vbmeta_vendor                  flags=display=vbmeta_vendor
+/vbmeta_system            emmc     /dev/block/by-name/vbmeta_system                  flags=display=vbmeta_system
+/vbmeta                   emmc     /dev/block/by-name/vbmeta                         flags=backup=1;display="VBMeta";flashimg=1
+
+# External Partitions
+/external_sd              vfat     /dev/block/mmcblk0p1         /dev/block/mmcblk0   flags=display="Micro SD Card";storage;wipeingui;removable
+/usb-otg                  vfat     /dev/block/sdd               /dev/block/sdd1      flags=display="USB OTG";storage;wipeingui;removable
