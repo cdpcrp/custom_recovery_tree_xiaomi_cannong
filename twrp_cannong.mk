@@ -18,7 +18,7 @@ $(call inherit-product, device/xiaomi/cannong/device.mk)
 PRODUCT_DEVICE := cannong
 PRODUCT_NAME := twrp_cannong
 PRODUCT_BRAND := Redmi
-PRODUCT_MODEL := M2007J22G
+PRODUCT_MODEL := Redmi Note 9T
 PRODUCT_MANUFACTURER := xiaomi
 
 PRODUCT_GMS_CLIENTID_BASE := android-xiaomi
