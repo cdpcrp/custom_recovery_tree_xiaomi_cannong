@@ -9,13 +9,3 @@ ro.mtk_microtrust_tee_support=1
 # Hardware
 ro.mediatek.platform=MT6853
 ro.hardware=mt66853
-
-# Crypto
-fbe.metadata.wrappedkey=true
-ro.crypto.volume.filenames_mode=aes-256-cts
-ro.crypto.metadata.enabled=true
-ro.crypto.support_metadata_encrypt=true
-ro.crypto.uses_fs_ioc_add_encryption_key=true
-ro.crypto.volume.metadata.method=dm-default-key
-ro.crypto.dm_default_key.options_format.version=1
-ro.crypto.volume.options=::v1
