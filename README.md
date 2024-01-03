@@ -1,5 +1,5 @@
 # Custom Recovery Tree
-Build your own custom recovery for Xiamoni Redmi Note 9T - M2007J22G (cannong).
+Build your own custom recovery for Xiaomi Redmi Note 9T - M2007J22G (cannong).
 
 ```
 #
