@@ -9,14 +9,14 @@
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 
-# Inherit some common twrp stuff.
-$(call inherit-product, vendor/twrp/config/common.mk)
+# Inherit some common PBRP stuff.
+$(call inherit-product, vendor/pb/config/common.mk)
 
 # Inherit from cannong device
 $(call inherit-product, device/xiaomi/cannong/device.mk)
 
 PRODUCT_DEVICE := cannong
-PRODUCT_NAME := twrp_cannong
+PRODUCT_NAME := omni_cannong
 PRODUCT_BRAND := Redmi
 PRODUCT_MODEL := Redmi Note 9T
 PRODUCT_MANUFACTURER := xiaomi
