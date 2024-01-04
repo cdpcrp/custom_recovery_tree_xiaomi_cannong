@@ -14,12 +14,12 @@
 /bootloader               emmc     /dev/block/by-name/lk           
 /bootloader2              emmc     /dev/block/by-name/lk2          
 /cust                     ext4     /dev/block/by-name/cust        
-/recovery                 emmc     /dev/block/by-name/recovery                       flags=display=recovery;backup=1
-/boot                     emmc     /dev/block/by-name/boot                           flags=display=boot;backup=1
+/recovery                 emmc     /dev/block/by-name/recovery                       flags=display="Recovery";backup=1
+/boot                     emmc     /dev/block/by-name/boot                           flags=display="Boot";backup=1
 
 # VBMeta
-/vbmeta_vendor            emmc     /dev/block/by-name/vbmeta_vendor                  flags=display=vbmeta_vendor
-/vbmeta_system            emmc     /dev/block/by-name/vbmeta_system                  flags=display=vbmeta_system
+/vbmeta_vendor            emmc     /dev/block/by-name/vbmeta_vendor                  flags=display="VBMeta_Vendor"
+/vbmeta_system            emmc     /dev/block/by-name/vbmeta_system                  flags=display="VBMeta_System"
 /vbmeta                   emmc     /dev/block/by-name/vbmeta                         flags=backup=1;display="VBMeta";flashimg=1
 
 # External Partitions
