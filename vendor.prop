@@ -9,3 +9,6 @@ ro.mtk_microtrust_tee_support=1
 # Hardware
 ro.mediatek.platform=MT6853
 ro.hardware=mt66853
+
+# Keymaster Version
+keymaster_ver=4.1
