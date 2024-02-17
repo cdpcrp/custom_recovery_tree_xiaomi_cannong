@@ -19,6 +19,14 @@ PRODUCT_PACKAGES += \
     android.hardware.fastboot@1.0-impl-mock \
     fastbootd
 
+# FBE v2
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.crypto.allow_encrypt_override=true \
+    ro.crypto.volume.filenames_mode=aes-256-cts \
+    ro.crypto.volume.metadata.method=dm-default-key \
+    ro.crypto.dm_default_key.options_format.version=2 \
+    ro.crypto.volume.options=::v2
+
 # Recovery additional binaries
 TARGET_RECOVERY_DEVICE_MODULES += \
     android.hidl.allocator@1.0 \
