@@ -1,8 +1,0 @@
-on property:ro.crypto.state=encrypted && property:hwservicemanager.ready=true
-    start thh-2-0
-
-service thh-2-0 /system/bin/vendor.microtrust.hardware.thh@2.0-service
-    user root
-    group root
-    disabled
-    seclabel u:r:recovery:s0
