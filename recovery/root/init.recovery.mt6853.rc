@@ -2,11 +2,28 @@ import /init.recovery.microtrust.rc
 
 on init
     export LD_LIBRARY_PATH /system/lib64:/vendor/lib64:/vendor/lib64/hw:/system/lib64/hw
+    # Create a more standard /dev/block layout for our scripts
+    symlink /dev/block/platform/bootdevice /dev/block/bootdevice
+    mkdir /mnt/vendor/persist 0700 root root
+    mount ext4 /dev/block/platform/bootdevice/by-name/persist /mnt/vendor/persist
 
-on property:ro.crypto.state=encrypted && property:ro.crypto.type=file
-    install_keyring
+on boot
+    start health-hal-2-0
 
-service keymaster-4-1 /system/bin/android.hardware.keymaster@4.1-service.beanpod
+service keystore_auth /system/bin/keystore_auth
+    oneshot
+    user root
+    group root
+    disabled
+    seclabel u:r:recovery:s0
+
+service keystore /system/bin/keystore /tmp/misc/keystore
+    user root
+    group root drmrpc readproc
+    disabled
+    seclabel u:r:recovery:s0
+
+service keymaster-4-1 /vendor/bin/hw/android.hardware.keymaster@4.1-service.beanpod
     interface android.hardware.keymaster@4.0::IKeymasterDevice default
     interface android.hardware.keymaster@4.1::IKeymasterDevice default
     user root
@@ -14,28 +31,27 @@ service keymaster-4-1 /system/bin/android.hardware.keymaster@4.1-service.beanpod
     disabled
     seclabel u:r:recovery:s0
 
-service gatekeeper-1-0 /system/bin/android.hardware.gatekeeper@1.0-service
+service gatekeeper-1-0 /vendor/bin/hw/android.hardware.gatekeeper@1.0-service
     interface android.hardware.gatekeeper@1.0::IGatekeeper default
     user root
     group root
     disabled
     seclabel u:r:recovery:s0
 
+on property:ro.crypto.state=encrypted && property:ro.crypto.type=file
+    install_keyring
+
+on property:hwservicemanager.ready=true
+    start keymaster-4-1
+    start gatekeeper-1-0
+
 on property:vendor.sys.listener.registered=true
     start keymaster-4-1
     start gatekeeper-1-0
    
-on property:ro.crypto.state=unsupported
+on property:twrp.decrypt.done=true && property:twrp.all.users.decrypted=true
     stop teei_daemon
     stop keymaster-4-1
     stop gatekeeper-1-0
-    
-on property:ro.crypto.state=unencrypted
-    stop teei_daemon
-    stop keymaster-4-1
-    stop gatekeeper-1-0
-
-on property:twrp.all.users.decrypted=true
-    stop teei_daemon
-    stop keymaster-4-1
-    stop gatekeeper-1-0
+    stop servicemanager
+    stop hwservicemanager
