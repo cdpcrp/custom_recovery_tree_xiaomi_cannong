@@ -1,0 +1,5 @@
+service thh-2-0 /vendor/bin/hw/vendor.microtrust.hardware.thh@2.0-service
+    user system
+    group system
+    disabled
+    seclabel u:r:recovery:s0

@@ -1,12 +1,12 @@
-import /init.recovery.microtrust.rc
-
 on init
+    setprop sys.usb.configfs 1
+    setprop sys.usb.ffs.aio_compat 1
     export LD_LIBRARY_PATH /system/lib64:/vendor/lib64:/vendor/lib64/hw:/system/lib64/hw
 
-on fs
+on property:ro.crypto.state=encrypted && property:ro.crypto.type=file
     install_keyring
 
-service keymaster-4-1 /system/bin/android.hardware.keymaster@4.1-service.beanpod
+service keymaster-4-1 /vendor/bin/hw/android.hardware.keymaster@4.1-service.beanpod
     interface android.hardware.keymaster@4.0::IKeymasterDevice default
     interface android.hardware.keymaster@4.1::IKeymasterDevice default
     user root
@@ -14,7 +14,7 @@ service keymaster-4-1 /system/bin/android.hardware.keymaster@4.1-service.beanpod
     disabled
     seclabel u:r:recovery:s0
 
-service gatekeeper-1-0 /system/bin/android.hardware.gatekeeper@1.0-service
+service gatekeeper-1-0 /vendor/bin/hw/android.hardware.gatekeeper@1.0-service
     interface android.hardware.gatekeeper@1.0::IGatekeeper default
     user root
     group root
@@ -28,29 +28,43 @@ service keystore_auth /system/bin/keystore_auth
     disabled
     seclabel u:r:recovery:s0
 
-service keystore2 /system/bin/keystore2 /tmp/misc/keystore
-    class early_hal
+service keystore /system/bin/keystore /tmp/misc/keystore
     user root
-    group keystore readproc log
+    group root drmrpc readproc
     disabled
-    writepid /dev/cpuset/foreground/tasks
     seclabel u:r:recovery:s0
 
 on property:vendor.sys.listener.registered=true
+    start teei_daemon
+    start gatekeeper-1-0
+    start keymaster-4-1
+    start soter-1-0
+    start thh-2-0
+   
+on property:hwservicemanager.ready=true
+    start teei_daemon
     start keymaster-4-1
     start gatekeeper-1-0
-   
+    start soter-1-0
+    start thh-2-0
+
 on property:ro.crypto.state=unsupported
     stop teei_daemon
     stop keymaster-4-1
     stop gatekeeper-1-0
+    stop soter-1-0
+    stop thh-2-0
     
 on property:ro.crypto.state=unencrypted
     stop teei_daemon
     stop keymaster-4-1
     stop gatekeeper-1-0
+    stop soter-1-0
+    stop thh-2-0
 
 on property:twrp.all.users.decrypted=true
     stop teei_daemon
     stop keymaster-4-1
     stop gatekeeper-1-0
+    stop soter-1-0
+    stop thh-2-0
