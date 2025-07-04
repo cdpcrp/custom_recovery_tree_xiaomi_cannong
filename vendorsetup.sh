@@ -31,8 +31,7 @@ if [ "$1" = "$FDEVICE" -o "$FOX_BUILD_DEVICE" = "$FDEVICE" ]; then
     export FOX_USE_TWRP_RECOVERY_IMAGE_BUILDER=1
 
     # Maintaining Info
-    export OF_MAINTAINER=Crypton
-    export FOX_VERSION=$(date +%y.%m.%d)
+    export FOX_MAINTAINER_PATCH_VERSION=Crypton
     export FOX_BUILD_TYPE=Unofficial
 
     # Device
@@ -61,17 +60,12 @@ if [ "$1" = "$FDEVICE" -o "$FOX_BUILD_DEVICE" = "$FDEVICE" ]; then
     # Patch
     export OF_FORCE_MAGISKBOOT_BOOT_PATCH_MIUI=1
     export OF_USE_MAGISKBOOT_FOR_ALL_PATCHES=1
-    export OF_OTA_RES_DECRYPT=1
     export OF_SUPPORT_ALL_BLOCK_OTA_UPDATES=1
     export OF_NO_RELOAD_AFTER_DECRYPTION=1
-    export FOX_BUGGED_AOSP_ARB_WORKAROUND="1546300800"; # Tuesday, January 1, 2019 12:00:00 AM GMT+00:00
     export OF_FBE_METADATA_MOUNT_IGNORE=1
     export OF_PATCH_AVB20=1
     export OF_NO_SPLASH_CHANGE=1
     export OF_DEFAULT_KEYMASTER_VERSION=4.1
-
-    # Logical Partitions
-    export OF_IGNORE_LOGICAL_MOUNT_ERRORS=1
 
 # let's see what are our build VARs
     if [ -n "$FOX_BUILD_LOG_FILE" -a -f "$FOX_BUILD_LOG_FILE" ]; then
