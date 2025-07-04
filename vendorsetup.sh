@@ -31,7 +31,8 @@ if [ "$1" = "$FDEVICE" -o "$FOX_BUILD_DEVICE" = "$FDEVICE" ]; then
     export FOX_USE_TWRP_RECOVERY_IMAGE_BUILDER=1
 
     # Maintaining Info
-    export FOX_MAINTAINER_PATCH_VERSION=Crypton
+    export OF_MAINTAINER=cdpcrp
+    export FOX_MAINTAINER_PATCH_VERSION=001
     export FOX_BUILD_TYPE=Unofficial
 
     # Device
