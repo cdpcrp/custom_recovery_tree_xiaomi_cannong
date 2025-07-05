@@ -32,7 +32,7 @@ if [ "$1" = "$FDEVICE" -o "$FOX_BUILD_DEVICE" = "$FDEVICE" ]; then
 
     # Maintaining Info
     export OF_MAINTAINER=cdpcrp
-    export FOX_MAINTAINER_PATCH_VERSION=001
+    export FOX_MAINTAINER_PATCH_VERSION="1"
     export FOX_BUILD_TYPE=Unofficial
 
     # Device
